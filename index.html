@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment • Yamzz Market</title>
+
+    <meta name="theme-color" content="#07111f">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(0, 119, 255, .15), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(0, 183, 255, .10), transparent 35%),
+                #050b14;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 7%;
+            background: rgba(5, 12, 24, .88);
+            border-bottom: 1px solid rgba(0, 174, 255, .15);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid rgba(0, 183, 255, .5);
+            box-shadow: 0 0 18px rgba(0, 174, 255, .25);
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+
+        .brand-name span {
+            color: #00aeff;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .icon {
+            width: 65px;
+            height: 65px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #008cff, #0054a6);
+            box-shadow: 0 0 30px rgba(0, 153, 255, .3);
+            font-size: 27px;
+        }
+
+        .header h1 {
+            margin-top: 18px;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #8fa4ba;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* INSTRUCTION */
+        .instruction {
+            background: rgba(8, 20, 36, .88);
+            border: 1px solid rgba(0, 174, 255, .18);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.2);
+        }
+
+        .instruction-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00aeff;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .instruction-title i {
+            font-size: 18px;
+        }
+
+        .instruction ol {
+            padding-left: 22px;
+            color: #b8c7d8;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .instruction strong {
+            color: white;
+        }
+
+        /* PAYMENT CARD */
+        .payment-box {
+            background: rgba(8, 20, 36, .88);
+            border: 1px solid rgba(0, 174, 255, .18);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.2);
+        }
+
+        .payment-box h2 {
+            font-size: 17px;
+            margin-bottom: 16px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .method {
+            cursor: pointer;
+            padding: 17px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(255,255,255,.025);
+            text-align: center;
+            transition: .25s;
+        }
+
+        .method:hover {
+            border-color: rgba(0,174,255,.4);
+            transform: translateY(-2px);
+        }
+
+        .method.active {
+            border-color: #00aeff;
+            background: rgba(0,174,255,.10);
+            box-shadow: 0 0 20px rgba(0,174,255,.12);
+        }
+
+        .method i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 9px;
+            color: #00aeff;
+        }
+
+        .method span {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* PAYMENT CONTENT */
+        .payment-content {
+            margin-top: 22px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+
+        .payment-content h3 {
+            font-size: 16px;
+            margin-bottom: 17px;
+        }
+
+        .payment-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,.2);
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        .info-left small {
+            display: block;
+            color: #7f94aa;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .info-left strong {
+            font-size: 16px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            min-width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 11px;
+            background: rgba(0,174,255,.12);
+            color: #00aeff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .2s;
+        }
+
+        .copy-btn:hover {
+            background: #00aeff;
+            color: #fff;
+        }
+
+        /* QRIS */
+        .qris-wrapper {
+            text-align: center;
+        }
+
+        .qris-image {
+            width: 230px;
+            height: 230px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 5px auto 15px;
+            display: block;
+        }
+
+        .qris-note {
+            color: #8297ad;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* BUTTON */
+        .paid-btn {
+            width: 100%;
+            border: none;
+            padding: 16px;
+            margin-top: 22px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #008cff, #0065c9);
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 140, 255, .2);
+            transition: .25s;
+        }
+
+        .paid-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 140, 255, .3);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            color: #5e7287;
+            font-size: 12px;
+            padding: 10px 20px 35px;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translate(-50%, 100px);
+            background: #0d1c2e;
+            border: 1px solid rgba(0,174,255,.3);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            opacity: 0;
+            transition: .3s;
+            z-index: 999;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .container {
+                margin: 30px auto;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .method {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 12px;
+                padding: 14px;
+            }
+
+            .method i {
+                margin: 0;
+            }
+
+            .qris-image {
+                width: 210px;
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#" class="brand">
+
+            <!-- GANTI URL LOGO DI SINI -->
+            <img
+                src="https://via.placeholder.com/100"
+                class="logo"
+                alt="Yamzz Market">
+
+            <div class="brand-name">
+                Yamzz <span>Market</span>
+            </div>
+
+        </a>
+    </nav>
+
+
+    <main class="container">
+
+        <div class="header">
+            <div class="icon">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <h1>Pembayaran</h1>
+            <p>Pilih metode pembayaran yang ingin kamu gunakan.</p>
+        </div>
+
+
+        <!-- INSTRUKSI -->
+        <section class="instruction">
+
+            <div class="instruction-title">
+                <i class="fa-solid fa-circle-info"></i>
+                <span id="instructionTitle">Cara Pembayaran QRIS</span>
+            </div>
+
+            <ol id="instructionList">
+                <li>Buka aplikasi pembayaran yang mendukung <strong>QRIS</strong>.</li>
+                <li>Scan QRIS yang tersedia di bawah.</li>
+                <li>Masukkan nominal pembayaran sesuai total transaksi.</li>
+                <li>Pastikan nama penerima sudah benar.</li>
+                <li>Selesaikan pembayaran dan simpan bukti transaksi.</li>
+            </ol>
+
+        </section>
+
+
+        <!-- PAYMENT -->
+        <section class="payment-box">
+
+            <h2>Pilih Metode Pembayaran</h2>
+
+            <div class="payment-methods">
+
+                <div class="method active" onclick="selectPayment('qris', this)">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>QRIS</span>
+                </div>
+
+                <div class="method" onclick="selectPayment('dana', this)">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>DANA</span>
+                </div>
+
+                <div class="method" onclick="selectPayment('seabank', this)">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>SeaBank</span>
+                </div>
+
+            </div>
+
+
+            <div class="payment-content">
+
+                <!-- QRIS -->
+                <div id="qrisContent">
+
+                    <h3>Scan QRIS</h3>
+
+                    <div class="qris-wrapper">
+
+                        <!-- GANTI DENGAN LINK QRIS KAMU -->
+                        <img
+                            src="https://yamzzoffc.my.id/assets/qr.png"
+                            class="qris-image"
+                            alt="QRIS Yamzz Market">
+
+                        <p class="qris-note">
+                            Scan QRIS menggunakan aplikasi pembayaran yang mendukung QRIS.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DANA -->
+                <div id="danaContent" style="display:none;">
+
+                    <h3>Transfer DANA</h3>
+
+                    <div class="payment-info">
+
+                        <div class="info-left">
+                            <small>Nomor DANA</small>
+                            <strong id="danaNumber">0881024256129</strong>
+                        </div>
+
+                        <button class="copy-btn"
+                                onclick="copyText('0881024256129')">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="payment-info">
+
+                        <div class="info-left">
+                            <small>Atas Nama</small>
+                            <strong>Ryan Ramadhan</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEABANK -->
+                <div id="seabankContent" style="display:none;">
+
+                    <h3>Transfer SeaBank</h3>
+
+                    <div class="payment-info">
+
+                        <div class="info-left">
+                            <small>Nomor Rekening</small>
+                            <strong id="seaNumber">XXXXXXXXXX</strong>
+                        </div>
+
+                        <button class="copy-btn"
+                                onclick="copyText('XXXXXXXXXX')">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="payment-info">
+
+                        <div class="info-left">
+                            <small>Nama Pemilik</small>
+                            <strong>Yamzz Market</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button class="paid-btn" onclick="confirmPayment()">
+                    <i class="fa-solid fa-check"></i>
+                    &nbsp; Saya Sudah Bayar
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © 2026 Yamzz Market • Payment System
+    </footer>
+
+
+    <div class="toast" id="toast">
+        Berhasil disalin!
+    </div>
+
+
+    <script>
+
+        let selectedPayment = "qris";
+
+
+        const paymentData = {
+
+            qris: {
+                title: "Cara Pembayaran QRIS",
+                instructions: [
+                    "Buka aplikasi pembayaran yang mendukung <strong>QRIS</strong>.",
+                    "Scan QRIS yang tersedia di bawah.",
+                    "Masukkan nominal pembayaran sesuai total transaksi.",
+                    "Pastikan nama penerima sudah benar.",
+                    "Selesaikan pembayaran dan simpan bukti transaksi."
+                ]
+            },
+
+            dana: {
+                title: "Cara Pembayaran DANA",
+                instructions: [
+                    "Buka aplikasi <strong>DANA</strong>.",
+                    "Pilih menu <strong>Kirim</strong> atau Transfer.",
+                    "Masukkan nomor DANA Yamzz Market.",
+                    "Masukkan nominal pembayaran sesuai total transaksi.",
+                    "Pastikan nama penerima benar, lalu lakukan pembayaran.",
+                    "Simpan bukti pembayaran."
+                ]
+            },
+
+            seabank: {
+                title: "Cara Pembayaran SeaBank",
+                instructions: [
+                    "Buka aplikasi <strong>SeaBank</strong>.",
+                    "Pilih menu <strong>Transfer</strong>.",
+                    "Masukkan nomor rekening SeaBank Yamzz Market.",
+                    "Masukkan nominal pembayaran sesuai total transaksi.",
+                    "Pastikan nama penerima sudah benar.",
+                    "Selesaikan pembayaran dan simpan bukti transfer."
+                ]
+            }
+
+        };
+
+
+        function selectPayment(type, element) {
+
+            selectedPayment = type;
+
+            document.querySelectorAll(".method")
+                .forEach(item => item.classList.remove("active"));
+
+            element.classList.add("active");
+
+
+            document.getElementById("qrisContent").style.display = "none";
+            document.getElementById("danaContent").style.display = "none";
+            document.getElementById("seabankContent").style.display = "none";
+
+            document.getElementById(type + "Content").style.display = "block";
+
+
+            const data = paymentData[type];
+
+            document.getElementById("instructionTitle").innerHTML =
+                data.title;
+
+            document.getElementById("instructionList").innerHTML =
+                data.instructions
+                    .map(item => `<li>${item}</li>`)
+                    .join("");
+
+        }
+
+
+        function copyText(text) {
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+
+                    const toast = document.getElementById("toast");
+
+                    toast.classList.add("show");
+
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                    }, 2000);
+
+                });
+
+        }
+
+
+        function confirmPayment() {
+
+            /*
+             * GANTI URL DI BAWAH DENGAN HALAMAN UPLOAD
+             * BUKTI PEMBAYARAN KAMU.
+             */
+
+            window.location.href =
+                "upload-bukti.html?payment=" + selectedPayment;
+
+        }
+
+    </script>
+
+</body>
+</html>

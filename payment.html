@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payment • Yamzz Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;background:radial-gradient(circle at top left,#0077ff26,transparent 35%),#050b14;color:#fff;min-height:100vh}.navbar{height:70px;padding:0 7%;display:flex;align-items:center;background:#050c18e6;border-bottom:1px solid #00aeff26;backdrop-filter:blur(15px)}.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}.logo{width:42px;height:42px;border-radius:12px;object-fit:cover;border:1px solid #00b7ff80}.brand b{font-size:18px}.brand span{color:#00aeff}.wrap{width:92%;max-width:850px;margin:42px auto}.head{text-align:center;margin-bottom:28px}.head .ico{width:65px;height:65px;margin:auto;display:grid;place-items:center;border-radius:20px;background:linear-gradient(145deg,#008cff,#0054a6);font-size:27px;box-shadow:0 0 30px #0099ff4d}.head h1{margin-top:17px;font-size:27px}.head p{margin-top:8px;color:#8fa4ba;font-size:13px}.card{background:#081424e0;border:1px solid #00aeff2e;border-radius:20px;padding:22px;box-shadow:0 15px 45px #0004;margin-bottom:18px}.title{display:flex;gap:9px;align-items:center;font-weight:700;font-size:15px;margin-bottom:15px}.title i{color:#00aeff}.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.method{cursor:pointer;padding:17px 12px;border-radius:15px;border:1px solid #ffffff12;background:#ffffff08;text-align:center;transition:.2s}.method.active{border-color:#00aeff;background:#00aeff1a;box-shadow:0 0 20px #00aeff1f}.method i{display:block;color:#00aeff;font-size:24px;margin-bottom:8px}.method span{font-size:13px;font-weight:700}.instruction{margin-top:20px;padding-top:20px;border-top:1px solid #ffffff0d}.instruction ol{padding-left:22px;color:#b8c7d8;font-size:13px;line-height:1.8}.instruction strong{color:#fff}.payment{margin-top:20px;padding-top:20px;border-top:1px solid #ffffff0d}.qris{text-align:center}.qris img{width:230px;height:230px;object-fit:contain;background:#fff;padding:10px;border-radius:15px}.note{color:#8297ad;font-size:11px;margin-top:12px;line-height:1.5}.info{padding:15px;background:#0003;border:1px solid #fff1;border-radius:14px;margin-bottom:12px}.info small{display:block;color:#7f94aa;font-size:11px;margin-bottom:5px}.info b{font-size:15px}.btn{width:100%;border:0;border-radius:13px;padding:15px;background:linear-gradient(135deg,#008cff,#0065c9);color:#fff;font-weight:800;cursor:pointer;margin-top:18px}footer{text-align:center;color:#53687c;font-size:11px;padding:5px 20px 35px}@media(max-width:600px){.navbar{padding:0 5%}.wrap{margin:30px auto}.methods{grid-template-columns:1fr}.method{display:flex;align-items:center;text-align:left;gap:12px}.method i{margin:0}.qris img{width:210px;height:210px}}
+</style></head>
+<body>
+<nav class="navbar"><a class="brand" href="#"><img class="logo" src="https://via.placeholder.com/100" alt="Yamzz Market"><b>Yamzz <span>Market</span></b></a></nav>
+<main class="wrap">
+<div class="head"><div class="ico"><i class="fa-solid fa-wallet"></i></div><h1>Pembayaran</h1><p>Pilih metode pembayaran yang ingin kamu gunakan.</p></div>
+<div class="card">
+<div class="title"><i class="fa-solid fa-circle-info"></i><span id="instructionTitle">Cara Pembayaran QRIS</span></div>
+<div class="instruction"><ol id="instructionList"></ol></div>
+<div class="title" style="margin-top:22px"><i class="fa-solid fa-credit-card"></i>Pilih Metode Pembayaran</div>
+<div class="methods">
+<div class="method active" onclick="selectPayment('qris',this)"><i class="fa-solid fa-qrcode"></i><span>QRIS</span></div>
+<div class="method" onclick="selectPayment('dana',this)"><i class="fa-solid fa-mobile-screen-button"></i><span>DANA</span></div>
+<div class="method" onclick="selectPayment('seabank',this)"><i class="fa-solid fa-building-columns"></i><span>SeaBank</span></div>
+</div>
+<div class="payment">
+<div id="qris"><div class="qris"><img src="https://via.placeholder.com/500x500.png?text=QRIS+YAMZZ+MARKET" alt="QRIS"><p class="note">Ganti gambar QRIS di kode dengan QRIS milik kamu.</p></div></div>
+<div id="dana" style="display:none"><div class="info"><small>Nomor DANA</small><b>08XXXXXXXXXX</b></div><div class="info"><small>Nama Penerima</small><b>Yamzz Market</b></div></div>
+<div id="seabank" style="display:none"><div class="info"><small>Nomor Rekening SeaBank</small><b>XXXXXXXXXX</b></div><div class="info"><small>Nama Pemilik</small><b>Yamzz Market</b></div></div>
+<button class="btn" onclick="goUpload()"><i class="fa-solid fa-check"></i>&nbsp; Saya Sudah Bayar</button>
+</div></div></div></main>
+<footer>© 2026 Yamzz Market • Payment System</footer>
+<script>
+const data={qris:["Cara Pembayaran QRIS",["Buka aplikasi pembayaran yang mendukung <strong>QRIS</strong>.","Scan QRIS yang tersedia.","Masukkan nominal sesuai total transaksi.","Pastikan nama penerima benar.","Selesaikan pembayaran dan simpan bukti."]],dana:["Cara Pembayaran DANA",["Buka aplikasi <strong>DANA</strong>.","Pilih Kirim/Transfer.","Masukkan nomor DANA Yamzz Market.","Masukkan nominal sesuai transaksi.","Pastikan penerima benar lalu bayar.","Simpan bukti pembayaran."]],seabank:["Cara Pembayaran SeaBank",["Buka aplikasi <strong>SeaBank</strong>.","Pilih Transfer.","Masukkan rekening SeaBank Yamzz Market.","Masukkan nominal sesuai transaksi.","Pastikan penerima benar lalu bayar.","Simpan bukti transfer."]]};let selected="qris";
+function selectPayment(type,el){selected=type;document.querySelectorAll(".method").forEach(x=>x.classList.remove("active"));el.classList.add("active");["qris","dana","seabank"].forEach(x=>document.getElementById(x).style.display=x===type?"block":"none");document.getElementById("instructionTitle").innerHTML=data[type][0];document.getElementById("instructionList").innerHTML=data[type][1].map(x=>"<li>"+x+"</li>").join("")}
+function goUpload(){location.href="upload-bukti.html?payment="+encodeURIComponent(selected)}
+selectPayment("qris",document.querySelector(".method.active"));
+</script></body></html>
